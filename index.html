@@ -1,0 +1,1952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart of Hernando — Local Support, Restoring Hope</title>
+    
+    <!-- Google Fonts for Luxury Aesthetic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for minimal UI icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- RESET & VARIABLES --- */
+        :root {
+            --bg-color: #050505;
+            --card-bg: #0d0d0d;
+            --text-primary: #ffffff;
+            --text-secondary: #a6a6a6;
+            --accent-gold: #c5a880;
+            --accent-gold-hover: #e5c9a3;
+            --accent-red: #d9534f;
+            --border-color: #1a1a1a;
+            --font-serif: 'Cinzel', Georgia, serif;
+            --font-sans: 'Montserrat', sans-serif;
+            --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--bg-color);
+        }
+
+        /* --- GLOBAL TYPOGRAPHY --- */
+        h1, h2, h3, h4 {
+            font-family: var(--font-serif);
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            line-height: 1.2;
+            color: var(--text-primary);
+        }
+
+        p {
+            font-weight: 300;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            letter-spacing: 0.03em;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+
+        /* --- LUXURY FIXED NAVIGATION --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(5, 5, 5, 0.85);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: var(--transition-smooth);
+        }
+
+        header.scrolled {
+            background-color: rgba(5, 5, 5, 0.98);
+            border-bottom: 1px solid rgba(197, 168, 128, 0.15);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .nav-container {
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition-smooth);
+        }
+
+        header.scrolled .nav-container {
+            padding: 18px 40px;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            z-index: 1010;
+        }
+
+        .logo-main {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            color: var(--text-primary);
+            transition: var(--transition-smooth);
+        }
+
+        .logo-sub {
+            font-size: 0.6rem;
+            letter-spacing: 0.42em;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            margin-top: 4px;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-item a {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.22em;
+            font-weight: 500;
+            padding: 10px 0;
+            color: var(--text-secondary);
+            display: inline-block;
+        }
+
+        /* Elegant Hover Transition (Slight expand + gold fade) */
+        .nav-item a:hover {
+            color: var(--text-primary);
+            letter-spacing: 0.26em;
+        }
+
+        /* Minimalist Locator Dot for Active Page */
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: var(--accent-gold);
+            transition: var(--transition-smooth);
+            opacity: 0;
+        }
+
+        .nav-item.active a {
+            color: var(--accent-gold);
+        }
+
+        .nav-item.active::after {
+            transform: translateX(-50%) scale(1);
+            opacity: 1;
+        }
+
+        /* Premium pill design for high-priority routing */
+        .nav-item.highlight-nav a {
+            color: var(--accent-gold);
+            border: 1px solid rgba(197, 168, 128, 0.35);
+            padding: 10px 22px;
+            border-radius: 50px;
+            background: rgba(197, 168, 128, 0.02);
+            transition: var(--transition-smooth);
+        }
+
+        .nav-item.highlight-nav::after {
+            display: none;
+        }
+
+        .nav-item.highlight-nav a:hover {
+            background-color: var(--accent-gold);
+            color: var(--bg-color) !important;
+            border-color: var(--accent-gold);
+            letter-spacing: 0.22em; /* Keep static to prevent resizing pill */
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(197, 168, 128, 0.2);
+        }
+
+        /* Mobile Hamburger */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            z-index: 1010;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 1px;
+            background-color: var(--text-primary);
+            margin: 6px auto;
+            transition: var(--transition-smooth);
+        }
+
+        /* --- MULTI-PAGE SPA ROUTING --- */
+        .page {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            padding-top: 95px;
+            min-height: calc(100vh - 400px);
+            background-color: var(--bg-color);
+        }
+
+        .page.active-page {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- REUSABLE COMPONENTS --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 40px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-subtitle {
+            font-size: 0.75rem;
+            color: var(--accent-gold);
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 1px;
+            background-color: var(--accent-gold);
+            margin: 20px auto 0 auto;
+        }
+
+        .btn-luxury {
+            display: inline-block;
+            padding: 16px 36px;
+            border: 1px solid var(--text-primary);
+            background: transparent;
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-luxury::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: var(--text-primary);
+            transition: var(--transition-smooth);
+            z-index: -1;
+        }
+
+        .btn-luxury:hover {
+            color: var(--bg-color);
+        }
+
+        .btn-luxury:hover::before {
+            left: 0;
+        }
+
+        .btn-luxury.gold {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        .btn-luxury.gold::before {
+            background-color: var(--accent-gold);
+        }
+
+        .btn-luxury.gold:hover {
+            color: var(--bg-color);
+        }
+
+        .hero-btn-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* --- HOME: HERO SLIDER CAROUSEL --- */
+        .hero-slider-container {
+            position: relative;
+            height: 85vh;
+            width: 100%;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            z-index: 1;
+            transition: opacity 0.8s ease-in-out;
+            display: flex;
+            align-items: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.25) contrast(1.15);
+            transform: scale(1.05);
+            transition: transform 5s ease-out;
+        }
+
+        .slide.active .slide-bg {
+            transform: scale(1);
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 3;
+            max-width: 950px;
+            margin-left: 10%;
+            padding: 0 40px;
+        }
+
+        .slide-meta {
+            font-size: 0.75rem;
+            letter-spacing: 0.35em;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .slide-title {
+            font-size: 3.5rem;
+            color: var(--text-primary);
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            line-height: 1.15;
+            font-family: var(--font-serif);
+        }
+
+        .slide-desc {
+            max-width: 650px;
+            margin-bottom: 35px;
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .slider-nav {
+            position: absolute;
+            bottom: 40px;
+            right: 10%;
+            z-index: 10;
+            display: flex;
+            gap: 15px;
+        }
+
+        .slider-btn {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-primary);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-smooth);
+        }
+
+        .slider-btn:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        /* --- MISSION & GRID LAYOUTS --- */
+        .mission-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            margin-bottom: 100px;
+        }
+
+        .mission-grid.reverse {
+            direction: rtl;
+        }
+
+        .mission-grid.reverse .mission-text {
+            direction: ltr;
+        }
+
+        .mission-img-wrapper {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .mission-img-wrapper::after {
+            content: '';
+            display: block;
+            padding-bottom: 110%;
+        }
+
+        .mission-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) brightness(0.5);
+            transition: var(--transition-smooth);
+        }
+
+        .mission-img-wrapper:hover .mission-img {
+            transform: scale(1.05);
+            filter: grayscale(30%) brightness(0.6);
+        }
+
+        .mission-title-small {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--text-primary);
+        }
+
+        .mission-p {
+            margin-bottom: 30px;
+        }
+
+        /* --- PROGRAMS: 4-GRID PILLARS --- */
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .program-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: var(--transition-smooth);
+        }
+
+        .program-card:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-8px);
+        }
+
+        .program-img-container {
+            width: 100%;
+            height: 280px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .program-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) brightness(0.5);
+            transition: var(--transition-smooth);
+        }
+
+        .program-card:hover .program-img {
+            filter: grayscale(20%) brightness(0.6);
+            transform: scale(1.03);
+        }
+
+        .program-info {
+            padding: 40px 30px;
+        }
+
+        .program-tag {
+            font-size: 0.65rem;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .program-card-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .program-card-desc {
+            margin-bottom: 25px;
+            font-size: 0.88rem;
+        }
+
+        /* --- SPONSORS: PYRAMID SYSTEM --- */
+        .sponsor-pyramid {
+            display: flex;
+            flex-direction: column;
+            gap: 45px;
+            max-width: 1000px;
+            margin: 50px auto 0 auto;
+        }
+
+        .pyramid-tier {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .tier-header {
+            font-family: var(--font-serif);
+            font-size: 0.8rem;
+            color: var(--accent-gold);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            position: relative;
+            text-align: center;
+            width: 100%;
+        }
+
+        .tier-header::after {
+            content: '';
+            display: block;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+            margin-top: 12px;
+        }
+
+        .tier-row {
+            display: grid;
+            gap: 20px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* Dynamic Grid Layouts based on Tier Importance */
+        .tier-platinum .tier-row {
+            grid-template-columns: minmax(280px, 450px);
+        }
+
+        .tier-gold .tier-row {
+            grid-template-columns: repeat(2, minmax(200px, 320px));
+        }
+
+        .tier-silver .tier-row {
+            grid-template-columns: repeat(3, minmax(180px, 240px));
+        }
+
+        .sponsor-spot {
+            background-color: var(--card-bg);
+            border: 1px dashed var(--border-color);
+            height: 160px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+            transition: var(--transition-smooth);
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .sponsor-spot:hover {
+            border: 1px solid var(--accent-gold);
+            background-color: rgba(197, 168, 128, 0.02);
+            transform: translateY(-4px);
+        }
+
+        .spot-status {
+            font-family: var(--font-serif);
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: var(--transition-smooth);
+        }
+
+        .sponsor-spot:hover .spot-status {
+            color: var(--text-primary);
+        }
+
+        .spot-action {
+            font-size: 0.65rem;
+            color: var(--accent-gold);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        /* --- REQUEST HELP & INITIATIVE PORTALS --- */
+        .involve-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .involve-sticky {
+            position: sticky;
+            top: 130px;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 35px;
+        }
+
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 12px 0;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            outline: none;
+            transition: var(--transition-smooth);
+        }
+
+        .form-textarea {
+            height: 100px;
+            resize: none;
+        }
+
+        .form-select {
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .form-select option {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+        }
+
+        .input-label {
+            position: absolute;
+            top: 12px;
+            left: 0;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            pointer-events: none;
+            transition: var(--transition-smooth);
+        }
+
+        .form-input:focus ~ .input-label,
+        .form-input:not(:placeholder-shown) ~ .input-label,
+        .form-textarea:focus ~ .input-label,
+        .form-textarea:not(:placeholder-shown) ~ .input-label {
+            top: -15px;
+            font-size: 0.65rem;
+            color: var(--accent-gold);
+        }
+
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            border-bottom-color: var(--accent-gold);
+        }
+
+        /* --- CONTACT SECTION --- */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 80px;
+        }
+
+        .contact-info-block {
+            margin-bottom: 40px;
+        }
+
+        .contact-info-title {
+            font-size: 0.75rem;
+            color: var(--accent-gold);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .contact-info-val {
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        /* Feedback styling for forms */
+        .form-feedback {
+            margin-top: 20px;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            display: none;
+        }
+
+        .form-feedback.success {
+            color: #2ec4b6;
+            display: block;
+        }
+
+        .form-feedback.error {
+            color: #e71d36;
+            display: block;
+        }
+
+        /* --- PORTAL / MODAL WINDOW --- */
+        .modal {
+            display: none; 
+            position: fixed;
+            z-index: 1500;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(5, 5, 5, 0.98);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 50px;
+            width: 100%;
+            max-width: 600px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 25px;
+            right: 30px;
+            font-size: 24px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .close-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .modal-form-group {
+            margin-bottom: 25px;
+        }
+
+        .modal-form-group label {
+            display: block;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 10px;
+            color: var(--accent-gold);
+        }
+
+        .modal-content input {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 12px 0;
+            font-size: 14px;
+            width: 100%;
+            box-sizing: border-box;
+            outline: none;
+            transition: var(--transition-smooth);
+        }
+
+        .modal-content input:focus {
+            border-bottom-color: var(--accent-gold);
+        }
+
+        .admin-btn {
+            background: var(--text-primary);
+            color: var(--bg-color);
+            border: 1px solid var(--text-primary);
+            padding: 16px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-top: 15px;
+            transition: var(--transition-smooth);
+        }
+
+        .admin-btn:hover {
+            background: transparent;
+            color: var(--text-primary);
+        }
+
+        .admin-btn-secondary {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+            padding: 10px 18px;
+            font-size: 10px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+
+        .admin-btn-secondary:hover {
+            border-color: var(--text-primary);
+            color: var(--text-primary);
+        }
+
+        .error-msg {
+            color: var(--accent-red);
+            font-size: 0.8rem;
+            margin-top: 15px;
+            letter-spacing: 0.05em;
+        }
+
+        #responsesContainer {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 30px;
+            padding-right: 15px;
+        }
+
+        .response-card {
+            border-bottom: 1px solid var(--border-color);
+            padding: 25px 0;
+        }
+
+        .response-card:last-child {
+            border-bottom: none;
+        }
+
+        .response-card h3 {
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+        }
+
+        .response-card p {
+            font-size: 0.85rem;
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #000000;
+            border-top: 1px solid var(--border-color);
+            padding: 100px 0 50px 0;
+            margin-top: auto;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+
+        .footer-col-title {
+            font-size: 0.8rem;
+            letter-spacing: 0.25em;
+            color: var(--accent-gold);
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .footer-about p {
+            margin-bottom: 25px;
+            font-size: 0.88rem;
+        }
+
+        .footer-links-list {
+            list-style: none;
+        }
+
+        .footer-links-list li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links-list a {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .footer-links-list a:hover {
+            color: var(--accent-gold);
+            padding-left: 5px;
+        }
+
+        .social-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-icon-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            transition: var(--transition-smooth);
+        }
+
+        .social-icon-btn:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            transform: translateY(-3px);
+        }
+
+        .newsletter-desc {
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+        }
+
+        .newsletter-box {
+            display: flex;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .newsletter-input {
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            padding: 10px 0;
+            width: 100%;
+            font-family: var(--font-sans);
+            outline: none;
+            font-size: 0.85rem;
+        }
+
+        .newsletter-btn {
+            background: transparent;
+            border: none;
+            color: var(--accent-gold);
+            cursor: pointer;
+            padding: 0 10px;
+            transition: var(--transition-smooth);
+        }
+
+        .newsletter-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: #666666;
+            letter-spacing: 0.1em;
+        }
+
+        .admin-lock-link {
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .admin-lock-link:hover {
+            color: var(--accent-gold);
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 1024px) {
+            .programs-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 50px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 20px;
+            }
+            header.scrolled .nav-container {
+                padding: 15px 20px;
+            }
+            .nav-menu {
+                position: fixed;
+                top: 75px;
+                left: 0;
+                width: 100%;
+                height: calc(100vh - 75px);
+                background-color: #000000;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 60px;
+                gap: 30px;
+                transform: translateX(100%);
+                transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+                z-index: 999;
+                border-top: 1px solid var(--border-color);
+            }
+            .nav-menu.mobile-open {
+                transform: translateX(0);
+            }
+            .hamburger {
+                display: block;
+            }
+            .hamburger.open span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            .hamburger.open span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.open span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+            .slide-title {
+                font-size: 2.2rem;
+            }
+            .hero-btn-group {
+                flex-direction: column;
+                width: 100%;
+            }
+            .hero-btn-group .btn-luxury {
+                width: 100%;
+                text-align: center;
+            }
+            .mission-grid, .mission-grid.reverse {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+            .tier-gold .tier-row, .tier-silver .tier-row {
+                grid-template-columns: 1fr;
+            }
+            .involve-grid, .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+            .involve-sticky {
+                position: relative;
+                top: 0;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- FIXED NAVIGATION -->
+    <header id="header">
+        <div class="nav-container">
+            <a href="#home" class="logo routing-trigger" data-target="home">
+                <span class="logo-main">HEART OF HERNANDO</span>
+                <span class="logo-sub">Direct Action Initiative</span>
+            </a>
+            
+            <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item active" data-page="home"><a href="#home" class="routing-trigger" data-target="home">Home</a></li>
+                <li class="nav-item" data-page="mission"><a href="#mission" class="routing-trigger" data-target="mission">Our Mission</a></li>
+                <li class="nav-item" data-page="programs"><a href="#programs" class="routing-trigger" data-target="programs">Programs</a></li>
+                <li class="nav-item" data-page="sponsors"><a href="#sponsors" class="routing-trigger" data-target="sponsors">Sponsors</a></li>
+                <li class="nav-item" data-page="get-involved"><a href="#get-involved" class="routing-trigger" data-target="get-involved">Become a Sponsor</a></li>
+                <li class="nav-item highlight-nav" data-page="request-help"><a href="#request-help" class="routing-trigger" data-target="request-help">Request Help & Guidance</a></li>
+                <li class="nav-item" data-page="contact"><a href="#contact" class="routing-trigger" data-target="contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- ================= PAGE 1: HOME ================= -->
+    <main id="home" class="page active-page">
+        <!-- Hero Section with Slideshow Carousel (Rotates Every 5s) -->
+        <section class="hero-slider-container">
+            <!-- Slide 1 -->
+            <div class="slide active">
+                <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1920&auto=format&fit=crop&blur=1&grayscale=1');"></div>
+                <div class="slide-content">
+                    <span class="slide-meta">HEART OF HERNANDO</span>
+                    <h1 class="slide-title">DIRECT RELIEF.<br>LOCAL EMPOWERMENT.</h1>
+                    <p class="slide-desc">Struggling to secure meals, cover housing costs, or navigate crisis? We route 100% of local sponsor funds directly to the immediate needs of Hernando County residents.</p>
+                    <div class="hero-btn-group">
+                        <a href="#request-help" class="btn-luxury routing-trigger" data-target="request-help">Apply for Help & Guidance</a>
+                        <a href="#get-involved" class="btn-luxury gold routing-trigger" data-target="get-involved">Sponsor Our Neighbors</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="slide">
+                <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=1920&auto=format&fit=crop&blur=1&grayscale=1');"></div>
+                <div class="slide-content">
+                    <span class="slide-meta">ESSENTIAL SERVICES</span>
+                    <h1 class="slide-title">STRENGTHENING WEAK POINTS,<br>RESTORING STABILITY.</h1>
+                    <p class="slide-desc">Through secure donor channels, we provide immediate housing assistance, supply vital groceries, and establish crucial civic pipelines for struggling families.</p>
+                    <div class="hero-btn-group">
+                        <a href="#programs" class="btn-luxury routing-trigger" data-target="programs">Our Programs</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="slide">
+                <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1469571486090-7db353a27522?q=80&w=1920&auto=format&fit=crop&blur=1&grayscale=1');"></div>
+                <div class="slide-content">
+                    <span class="slide-meta">SPONSORS & DONORS</span>
+                    <h1 class="slide-title">YOUR LOCAL TAX-DEDUCTIBLE<br>DONOR FUNDS AT WORK.</h1>
+                    <p class="slide-desc">When you invest in the Heart of Hernando, 100% of your sponsor contributions go directly toward community-directed aid and resources.</p>
+                    <div class="hero-btn-group">
+                        <a href="#sponsors" class="btn-luxury gold routing-trigger" data-target="sponsors">Meet Our Sponsors</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carousel Nav Controls -->
+            <div class="slider-nav">
+                <button class="slider-btn" id="prev-slide" aria-label="Previous Slide"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="slider-btn" id="next-slide" aria-label="Next Slide"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        </section>
+
+        <!-- Intro Mission Pitch -->
+        <section class="container reveal">
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <span class="section-subtitle">Our Purpose</span>
+                <h2 class="mission-title-small" style="margin-bottom: 30px;">NEIGHBORS SECURING NEIGHBORS</h2>
+                <p class="aid-intro-text">Heart of Hernando was founded on a straightforward truth: local support is the most efficient support system. By collecting backing from local businesses, partners, and active citizens, we quickly direct funds to secure nourishing meals, rental relief, wellness care, and vital navigation tools for everyday families in our community.</p>
+                <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 40px;">
+                    <a href="#mission" class="btn-luxury routing-trigger" data-target="mission">Read Our Philosophy</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= PAGE 2: OUR MISSION ================= -->
+    <main id="mission" class="page">
+        <section class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Our Foundation</span>
+                <h2 class="section-title">The Philosophy of Action</h2>
+            </div>
+            
+            <div class="mission-grid">
+                <div class="mission-text">
+                    <h3 class="mission-title-small">Directing 100% of Impact</h3>
+                    <p class="mission-p">We establish direct lines of communication and assistance to eliminate administrative delays. When a crisis strikes or a utility bill falls behind, we verify and resolve the emergency rapidly, ensuring support is precisely routed directly to verified local operations.</p>
+                    <p class="mission-p">Our metrics are not defined by general outreach, but by the physical volume of essential resources kept active in the residences of Hernando County.</p>
+                </div>
+                <div class="mission-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=800" class="mission-img" alt="Community assistance delivery">
+                </div>
+            </div>
+
+            <div class="mission-grid reverse">
+                <div class="mission-text">
+                    <h3 class="mission-title-small">Bridging Civic Gaps</h3>
+                    <p class="mission-p">Many of our neighbors are simply unaware of the county services, state grants, or regional support lines designed to help them. Part of our core action is providing navigators—guides who help residents secure documentation, fill out housing requests, and leverage existing public programs.</p>
+                </div>
+                <div class="mission-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?q=80&w=800" class="mission-img" alt="Direct guidance portal services">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= PAGE 3: PROGRAMS ================= -->
+    <main id="programs" class="page">
+        <section class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Core Initiatives</span>
+                <h2 class="section-title">Channels of Stabilization</h2>
+            </div>
+
+            <div class="programs-grid">
+                <!-- Food & Essentials -->
+                <div class="program-card">
+                    <div class="program-img-container">
+                        <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=600" class="program-img" alt="Food programs support">
+                    </div>
+                    <div class="program-info">
+                        <span class="program-tag">Resource 01</span>
+                        <h3 class="program-card-title">Food & Essentials</h3>
+                        <p class="program-card-desc">Sourcing and distributing healthy groceries, baby supplies, and everyday life essentials directly to low-income homes.</p>
+                    </div>
+                </div>
+
+                <!-- Housing & Shelter -->
+                <div class="program-card">
+                    <div class="program-img-container">
+                        <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=600" class="program-img" alt="Housing stabilization programs">
+                    </div>
+                    <div class="program-info">
+                        <span class="program-tag">Resource 02</span>
+                        <h3 class="program-card-title">Housing & Shelter</h3>
+                        <p class="program-card-desc">Providing temporary rent relief and assistance with emergency utility shut-off warnings to maintain household security.</p>
+                    </div>
+                </div>
+
+                <!-- Health & Wellness -->
+                <div class="program-card">
+                    <div class="program-img-container">
+                        <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=600" class="program-img" alt="Health support and wellness">
+                    </div>
+                    <div class="program-info">
+                        <span class="program-tag">Resource 03</span>
+                        <h3 class="program-card-title">Health & Wellness</h3>
+                        <p class="program-card-desc">Connecting citizens to local healthcare providers, and helping fund physical, mental, and developmental prescriptions.</p>
+                    </div>
+                </div>
+
+                <!-- Civic Resources -->
+                <div class="program-card">
+                    <div class="program-img-container">
+                        <img src="https://images.unsplash.com/photo-1450133064473-71024230f91b?q=80&w=600" class="program-img" alt="Civic navigation and resources">
+                    </div>
+                    <div class="program-info">
+                        <span class="program-tag">Resource 04</span>
+                        <h3 class="program-card-title">Civic Resources</h3>
+                        <p class="program-card-desc">Navigational guides providing instructions, state application assistance, and personal mentorship to foster long-term self-sufficiency.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= PAGE 4: SPONSORS ================= -->
+    <main id="sponsors" class="page">
+        <section class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Local Partners</span>
+                <h2 class="section-title">The Three-Tier Sponsor Pyramid</h2>
+            </div>
+
+            <!-- Sponsor Pyramid Layout -->
+            <div class="sponsor-pyramid">
+                
+                <!-- PLATINUM TIER (1 Slot) -->
+                <div class="pyramid-tier tier-platinum">
+                    <span class="tier-header">Platinum Tier</span>
+                    <div class="tier-row">
+                        <div class="sponsor-spot routing-trigger" data-target="get-involved">
+                            <span class="spot-status">Spot Open</span>
+                            <span class="spot-action">Become Our Premier Partner</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GOLD TIER (2 Slots) -->
+                <div class="pyramid-tier tier-gold">
+                    <span class="tier-header">Gold Tier</span>
+                    <div class="tier-row">
+                        <div class="sponsor-spot routing-trigger" data-target="get-involved">
+                            <span class="spot-status">Spot Open</span>
+                            <span class="spot-action">Register Gold Support</span>
+                        </div>
+                        <div class="sponsor-spot routing-trigger" data-target="get-involved">
+                            <span class="spot-status">Spot Open</span>
+                            <span class="spot-action">Register Gold Support</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SILVER TIER (3 Slots) -->
+                <div class="pyramid-tier tier-silver">
+                    <span class="tier-header">Silver Tier</span>
+                    <div class="tier-row">
+                        <div class="sponsor-spot routing-trigger" data-target="get-involved">
+                            <span class="spot-status">Spot Open</span>
+                            <span class="spot-action">Apply for Silver Slot</span>
+                        </div>
+                        <div class="sponsor-spot routing-trigger" data-target="get-involved">
+                            <span class="spot-status">Spot Open</span>
+                            <span class="spot-action">Apply for Silver Slot</span>
+                        </div>
+                        <div class="sponsor-spot routing-trigger" data-target="get-involved">
+                            <span class="spot-status">Spot Open</span>
+                            <span class="spot-action">Apply for Silver Slot</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= PAGE 5: BECOME A SPONSOR ================= -->
+    <main id="get-involved" class="page">
+        <section class="container">
+            <div class="involve-grid">
+                <div class="involve-sticky">
+                    <span class="section-subtitle">Sponsor Application</span>
+                    <h2 style="font-size: 2.2rem; margin-bottom: 25px;">Back the Community</h2>
+                    <p style="margin-bottom: 30px;">Choose a position inside our Three-Tier Sponsor Pyramid. Your investment is directed straight to families requesting emergency housing, essentials, and civic guidance.</p>
+                </div>
+
+                <div>
+                    <form id="sponsorForm" novalidate>
+                        <div class="input-group">
+                            <input type="text" class="form-input" id="sponsorName" required placeholder=" ">
+                            <label class="input-label" for="sponsorName">Contact / Organization Name</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="email" class="form-input" id="sponsorEmail" required placeholder=" ">
+                            <label class="input-label" for="sponsorEmail">Email Address</label>
+                        </div>
+                        <div class="input-group">
+                            <select class="form-select" id="sponsorTier" required>
+                                <option value="" disabled selected>Select Desired Tier</option>
+                                <option value="Platinum">Platinum Tier (Premier Supporter)</option>
+                                <option value="Gold">Gold Tier (Dual Support Positions)</option>
+                                <option value="Silver">Silver Tier (General Backer)</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <textarea class="form-textarea" id="sponsorMessage" required placeholder=" "></textarea>
+                            <label class="input-label" for="sponsorMessage">Tell us about your organization</label>
+                        </div>
+                        <button type="submit" class="btn-luxury gold">Submit Proposal</button>
+                        <div id="sponsorFeedback" class="form-feedback"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= PAGE 6: REQUEST HELP & GUIDANCE ================= -->
+    <main id="request-help" class="page">
+        <section class="container">
+            <div class="involve-grid">
+                <div class="involve-sticky">
+                    <span class="section-subtitle">Support Request Portal</span>
+                    <h2 style="font-size: 2.2rem; margin-bottom: 25px;">Apply for Assistance</h2>
+                    <p style="margin-bottom: 30px;">If you reside in Hernando County and need aid or professional program navigation, file your request here. All submissions are processed securely and handled with strict confidentiality.</p>
+                </div>
+
+                <div>
+                    <form id="helpForm" novalidate>
+                        <div class="input-group">
+                            <input type="text" class="form-input" id="helpName" required placeholder=" ">
+                            <label class="input-label" for="helpName">Your Full Name</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="email" class="form-input" id="helpEmail" required placeholder=" ">
+                            <label class="input-label" for="helpEmail">Email Address</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="tel" class="form-input" id="helpPhone" required placeholder=" ">
+                            <label class="input-label" for="helpPhone">Phone Number</label>
+                        </div>
+                        <div class="input-group">
+                            <select class="form-select" id="helpCategory" required>
+                                <option value="" disabled selected>Category of Crisis / Need</option>
+                                <option value="Food & Essentials">Food & Daily Essentials</option>
+                                <option value="Housing & Shelter">Housing Security & Utility Relief</option>
+                                <option value="Health & Wellness">Health Care & Wellness Care</option>
+                                <option value="Civic Resources">Civic Guidance & Application Navigation</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <textarea class="form-textarea" id="helpMessage" required placeholder=" "></textarea>
+                            <label class="input-label" for="helpMessage">Describe your situation and what resources are required</label>
+                        </div>
+                        <button type="submit" class="btn-luxury">Submit Confidential Request</button>
+                        <div id="helpFeedback" class="form-feedback"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= PAGE 7: CONTACT ================= -->
+    <main id="contact" class="page">
+        <section class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Connect With Us</span>
+                <h2 class="section-title">Direct Liaison Channels</h2>
+            </div>
+
+            <div class="contact-grid">
+                <div>
+                    <div class="contact-info-block">
+                        <h3 class="contact-info-title">Headquarters</h3>
+                        <p class="contact-info-val">Hernando County, FL</p>
+                    </div>
+                    <div class="contact-info-block">
+                        <h3 class="contact-info-title">General Inquiries</h3>
+                        <p class="contact-info-val">info@heartofhernando.org</p>
+                    </div>
+                    <div class="contact-info-block">
+                        <h3 class="contact-info-title">Follow</h3>
+                        <p class="contact-info-val" style="margin-top: 10px;">
+                            <a href="#" style="margin-right:15px; opacity:0.8;"><i class="fa-brands fa-facebook"></i></a>
+                            <a href="#" style="opacity:0.8;"><i class="fa-brands fa-instagram"></i></a>
+                        </p>
+                    </div>
+                </div>
+
+                <div>
+                    <form id="contactForm" novalidate>
+                        <div class="input-group">
+                            <input type="text" class="form-input" id="contactName" required placeholder=" ">
+                            <label class="input-label" for="contactName">Your Name</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="email" class="form-input" id="contactEmail" required placeholder=" ">
+                            <label class="input-label" for="contactEmail">Email Address</label>
+                        </div>
+                        <div class="input-group">
+                            <textarea class="form-textarea" id="contactMessage" required placeholder=" "></textarea>
+                            <label class="input-label" for="contactMessage">Inquiry details</label>
+                        </div>
+                        <button type="submit" class="btn-luxury">Send Message</button>
+                        <div id="contactFeedback" class="form-feedback"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-about">
+                <h4 class="footer-col-title">Heart of Hernando</h4>
+                <p>Establishing localized Direct Action Networks to rapidly provide nourishment, shelter, support, and civic guidance structures across Hernando County.</p>
+            </div>
+            <div>
+                <h4 class="footer-col-title">Information</h4>
+                <ul class="footer-links-list">
+                    <li><a href="#mission" class="routing-trigger" data-target="mission">Philosophy</a></li>
+                    <li><a href="#programs" class="routing-trigger" data-target="programs">Core Programs</a></li>
+                    <li><a href="#sponsors" class="routing-trigger" data-target="sponsors">Our Sponsors</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-col-title">Involvement</h4>
+                <ul class="footer-links-list">
+                    <li><a href="#get-involved" class="routing-trigger" data-target="get-involved">Become a Sponsor</a></li>
+                    <li><a href="#request-help" class="routing-trigger" data-target="request-help">Request Assistance</a></li>
+                    <li><a href="#contact" class="routing-trigger" data-target="contact">Direct Liaison</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-col-title">Direct Newsletter</h4>
+                <p class="newsletter-desc">Keep updated with real-time local logistics and intervention results.</p>
+                <div class="newsletter-box">
+                    <input type="email" placeholder="YOUR EMAIL ADDRESS" class="newsletter-input" aria-label="Newsletter Email">
+                    <button class="newsletter-btn" aria-label="Subscribe"><i class="fa-solid fa-arrow-right-long"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>&copy; 2026 HEART OF HERNANDO. ALL RIGHTS RESERVED.</span>
+            <span>
+                <i class="fa-solid fa-lock admin-lock-link" id="adminLockIcon" title="Admin Control Portal"></i> ADMIN
+            </span>
+        </div>
+    </footer>
+
+    <!-- ================= FIREBASE ADMIN AUTH MODAL ================= -->
+    <div id="adminModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            
+            <!-- Login State -->
+            <div id="authArea">
+                <h2 style="font-size: 1.5rem; margin-bottom: 10px;">Secure Access</h2>
+                <p style="opacity:0.6; font-size: 0.8rem; margin-bottom: 30px; letter-spacing: 0.05em; text-transform: uppercase;">Administrator Authorization Portal</p>
+                
+                <div class="modal-form-group">
+                    <label for="adminEmail">Corporate Email</label>
+                    <input type="email" id="adminEmail" placeholder="admin@heartofhernando.org">
+                </div>
+                
+                <div class="modal-form-group">
+                    <label for="adminPassword">Password</label>
+                    <input type="password" id="adminPassword" placeholder="••••••••">
+                </div>
+                
+                <button id="loginBtn" class="admin-btn">Verify Credentials</button>
+                <p id="authError" class="error-msg"></p>
+            </div>
+            
+            <!-- Dashboard State (Authorized Only) -->
+            <div id="dashboardArea" style="display: none;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 20px; margin-bottom: 20px;">
+                    <h2 style="font-size: 1.3rem;">Submission Influx</h2>
+                    <button id="logoutBtn" class="admin-btn-secondary">Terminate Session</button>
+                </div>
+                <div id="responsesContainer">Accessing encrypted archives...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FIREBASE MODULE LOGIC -->
+    <script type="module">
+        // Import Firebase SDK v10 (Vanilla JS Module CDN Integration)
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        // Firebase Credentials
+        const firebaseConfig = {
+            apiKey: "AIzaSyDTZKUDqzDeVeAk4kibJlFfYS4pCpwjBP4",
+            authDomain: "heart-of-hernando.firebaseapp.com",
+            projectId: "heart-of-hernando",
+            storageBucket: "heart-of-hernando.firebasestorage.app",
+            messagingSenderId: "773560018415",
+            appId: "1:773560018415:web:57c44a0c597206a791421a"
+        };
+
+        // Init Services
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        // Core UI selectors
+        const helpForm = document.getElementById("helpForm");
+        const sponsorForm = document.getElementById("sponsorForm");
+        const contactForm = document.getElementById("contactForm");
+
+        const helpFeedback = document.getElementById("helpFeedback");
+        const sponsorFeedback = document.getElementById("sponsorFeedback");
+        const contactFeedback = document.getElementById("contactFeedback");
+
+        /* ================= SUBMISSIONS STORAGE LOGIC ================= */
+        // Send Sponsor Request to Firestore
+        if(sponsorForm) {
+            sponsorForm.addEventListener("submit", async (e) => {
+                e.preventDefault();
+                const name = document.getElementById("sponsorName").value.trim();
+                const email = document.getElementById("sponsorEmail").value.trim();
+                const tier = document.getElementById("sponsorTier").value;
+                const message = document.getElementById("sponsorMessage").value.trim();
+
+                if(!name || !email || !tier || !message) {
+                    showFeedback(sponsorFeedback, "Please satisfy all inputs before submission.", "error");
+                    return;
+                }
+
+                try {
+                    await addDoc(collection(db, "submissions"), {
+                        formType: "Sponsorship Request",
+                        name,
+                        email,
+                        tier,
+                        message,
+                        timestamp: serverTimestamp()
+                    });
+                    showFeedback(sponsorFeedback, "Your sponsorship application has been securely submitted. Our direct liaison will contact you shortly.", "success");
+                    sponsorForm.reset();
+                } catch(err) {
+                    console.error("Firestore submission error:", err);
+                    showFeedback(sponsorFeedback, "Transmission failure. Please try again or contact direct support.", "error");
+                }
+            });
+        }
+
+        // Send Crisis Help Request to Firestore
+        if(helpForm) {
+            helpForm.addEventListener("submit", async (e) => {
+                e.preventDefault();
+                const name = document.getElementById("helpName").value.trim();
+                const email = document.getElementById("helpEmail").value.trim();
+                const phone = document.getElementById("helpPhone").value.trim();
+                const category = document.getElementById("helpCategory").value;
+                const message = document.getElementById("helpMessage").value.trim();
+
+                if(!name || !email || !phone || !category || !message) {
+                    showFeedback(helpFeedback, "Please satisfy all inputs before submission.", "error");
+                    return;
+                }
+
+                try {
+                    await addDoc(collection(db, "submissions"), {
+                        formType: "Aid Assistance Request",
+                        name,
+                        email,
+                        phone,
+                        category,
+                        message,
+                        timestamp: serverTimestamp()
+                    });
+                    showFeedback(helpFeedback, "Confidential case file submitted successfully. A resource officer will review this files immediately.", "success");
+                    helpForm.reset();
+                } catch(err) {
+                    console.error("Firestore submission error:", err);
+                    showFeedback(helpFeedback, "Transmission failure. Please try again or contact direct support.", "error");
+                }
+            });
+        }
+
+        // Send Contact Inquiry to Firestore
+        if(contactForm) {
+            contactForm.addEventListener("submit", async (e) => {
+                e.preventDefault();
+                const name = document.getElementById("contactName").value.trim();
+                const email = document.getElementById("contactEmail").value.trim();
+                const message = document.getElementById("contactMessage").value.trim();
+
+                if(!name || !email || !message) {
+                    showFeedback(contactFeedback, "Please satisfy all inputs before submission.", "error");
+                    return;
+                }
+
+                try {
+                    await addDoc(collection(db, "submissions"), {
+                        formType: "Direct Contact Inquiry",
+                        name,
+                        email,
+                        message,
+                        timestamp: serverTimestamp()
+                    });
+                    showFeedback(contactFeedback, "Your communication has been registered. We strive to reply within 24 hours.", "success");
+                    contactForm.reset();
+                } catch(err) {
+                    console.error("Firestore submission error:", err);
+                    showFeedback(contactFeedback, "Transmission failure. Please try again or contact direct support.", "error");
+                }
+            });
+        }
+
+        function showFeedback(element, text, status) {
+            element.textContent = text;
+            element.className = `form-feedback ${status}`;
+            setTimeout(() => {
+                element.style.display = "block";
+            }, 50);
+        }
+
+        /* ================= AUTHENTICATION & SECURED PORTAL ================= */
+        const adminLockIcon = document.getElementById("adminLockIcon");
+        const adminModal = document.getElementById("adminModal");
+        const closeModal = document.querySelector(".close-btn");
+        const loginBtn = document.getElementById("loginBtn");
+        const logoutBtn = document.getElementById("logoutBtn");
+        const adminEmailInput = document.getElementById("adminEmail");
+        const adminPasswordInput = document.getElementById("adminPassword");
+        const authArea = document.getElementById("authArea");
+        const dashboardArea = document.getElementById("dashboardArea");
+        const responsesContainer = document.getElementById("responsesContainer");
+        const authError = document.getElementById("authError");
+
+        // Open Modal Controls
+        adminLockIcon.addEventListener("click", () => {
+            adminModal.style.display = "flex";
+        });
+
+        // Close Modal Controls
+        const resetModalState = () => {
+            adminModal.style.display = "none";
+            authError.textContent = "";
+            adminEmailInput.value = "";
+            adminPasswordInput.value = "";
+        };
+
+        closeModal.addEventListener("click", resetModalState);
+        window.addEventListener("click", (e) => {
+            if (e.target === adminModal) {
+                resetModalState();
+            }
+        });
+
+        // Track user Auth session
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                authArea.style.display = "none";
+                dashboardArea.style.display = "block";
+                fetchDirectSubmissions();
+            } else {
+                authArea.style.display = "block";
+                dashboardArea.style.display = "none";
+                responsesContainer.innerHTML = "Accessing encrypted archives...";
+            }
+        });
+
+        // Fire user Auth Session
+        loginBtn.addEventListener("click", async () => {
+            const email = adminEmailInput.value.trim();
+            const password = adminPasswordInput.value;
+
+            if (!email || !password) {
+                authError.textContent = "Please provide valid administrative credentials.";
+                return;
+            }
+
+            try {
+                authError.textContent = "";
+                await signInWithEmailAndPassword(auth, email, password);
+            } catch (err) {
+                console.error("Auth Failure:", err);
+                if (err.code === "auth/invalid-credential" || err.code === "auth/wrong-password") {
+                    authError.textContent = "Authorization denied. Check inputs.";
+                } else {
+                    authError.textContent = err.message;
+                }
+            }
+        });
+
+        // Destroy User Session
+        logoutBtn.addEventListener("click", async () => {
+            try {
+                await signOut(auth);
+            } catch (err) {
+                console.error("Sign out process failed:", err);
+            }
+        });
+
+        // Retrieve Firestore data
+        async function fetchDirectSubmissions() {
+            try {
+                const snapshot = await getDocs(collection(db, "submissions"));
+                if (snapshot.empty) {
+                    responsesContainer.innerHTML = "<p style='opacity: 0.5;'>No form submission records located.</p>";
+                    return;
+                }
+
+                responsesContainer.innerHTML = "";
+                snapshot.forEach((doc) => {
+                    const info = doc.data();
+                    const card = document.createElement("div");
+                    card.className = "response-card";
+
+                    let bodyContent = `<h3>[${info.formType || "CASE FILE"}] REF: #${doc.id}</h3>`;
+
+                    for (const [prop, val] of Object.entries(info)) {
+                        if (prop === "formType") continue;
+                        let outputVal = val;
+                        if (val && typeof val === "object" && val.toDate) {
+                            outputVal = val.toDate().toLocaleString();
+                        }
+                        bodyContent += `<p><strong>${prop.toUpperCase()}:</strong> ${outputVal}</p>`;
+                    }
+
+                    card.innerHTML = bodyContent;
+                    responsesContainer.appendChild(card);
+                });
+            } catch (err) {
+                console.error("Database access failure:", err);
+                responsesContainer.innerHTML = `
+                    <p class="error-msg">Authorized pipeline closed.</p>
+                    <p style="font-size: 11px; opacity: 0.5; margin-top: 10px;">Check your Firebase Database Rules configuration.</p>
+                `;
+            }
+        }
+    </script>
+
+    <!-- CLASSIC FRONTEND CONTROLS & WEB ANIMATIONS -->
+    <script>
+        // Shrink Header Navigation on Scroll Actions
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Single Page Routing Logic
+        const routePages = (targetId) => {
+            // Find target section
+            const targetPage = document.getElementById(targetId);
+            if (!targetPage) return;
+
+            // Remove active status from all pages
+            document.querySelectorAll('.page').forEach(p => {
+                p.classList.remove('active-page');
+            });
+
+            // Make targeted page visible
+            targetPage.classList.add('active-page');
+
+            // Reset navigation highlight indicators
+            document.querySelectorAll('.nav-menu li').forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('data-page') === targetId) {
+                    item.classList.add('active');
+                }
+            });
+
+            // Close mobile viewport menu
+            document.getElementById('nav-menu').classList.remove('mobile-open');
+            document.getElementById('hamburger').classList.remove('open');
+
+            // Align scroll index
+            window.scrollTo({ top: 0, behavior: 'instant' });
+        };
+
+        // Setup triggers
+        document.addEventListener('click', (e) => {
+            const trigger = e.target.closest('.routing-trigger');
+            if (trigger) {
+                e.preventDefault();
+                const targetId = trigger.getAttribute('data-target');
+                routePages(targetId);
+                // Update Address Hash without scrolling standard mechanisms
+                history.pushState(null, null, `#${targetId}`);
+            }
+        });
+
+        // Direct Route Page on Page Refresh / Entry
+        window.addEventListener('load', () => {
+            const initialHash = window.location.hash.substring(1);
+            if (initialHash) {
+                routePages(initialHash);
+            }
+        });
+
+        // Mobile Responsive Toggle Drawer Menu
+        const hamburgerBtn = document.getElementById('hamburger');
+        const navigationMenu = document.getElementById('nav-menu');
+
+        hamburgerBtn.addEventListener('click', () => {
+            hamburgerBtn.classList.toggle('open');
+            navigationMenu.classList.toggle('mobile-open');
+        });
+
+        // Carousel Core Mechanics (5000ms Loop Period)
+        const carouselSlides = document.querySelectorAll('.slide');
+        const prevArrow = document.getElementById('prev-slide');
+        const nextArrow = document.getElementById('next-slide');
+        let currentSlideIndex = 0;
+        let slideLoopTimer;
+
+        const updateCarouselDisplay = (index) => {
+            carouselSlides.forEach(slide => slide.classList.remove('active'));
+            carouselSlides[index].classList.add('active');
+        };
+
+        const advanceSlide = () => {
+            currentSlideIndex = (currentSlideIndex + 1) % carouselSlides.length;
+            updateCarouselDisplay(currentSlideIndex);
+        };
+
+        const stepBackSlide = () => {
+            currentSlideIndex = (currentSlideIndex - 1 + carouselSlides.length) % carouselSlides.length;
+            updateCarouselDisplay(currentSlideIndex);
+        };
+
+        const restartSlideLoop = () => {
+            clearInterval(slideLoopTimer);
+            slideLoopTimer = setInterval(advanceSlide, 5000);
+        };
+
+        nextArrow.addEventListener('click', () => {
+            advanceSlide();
+            restartSlideLoop();
+        });
+
+        prevArrow.addEventListener('click', () => {
+            stepBackSlide();
+            restartSlideLoop();
+        });
+
+        // Initialize Carousel Timeline On Load
+        slideLoopTimer = setInterval(advanceSlide, 5000);
+    </script>
+</body>
+</html>
